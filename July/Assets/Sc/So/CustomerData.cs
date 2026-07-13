@@ -4,6 +4,7 @@ using System.Collections.Generic;
 [CreateAssetMenu(fileName = "CustomerData", menuName = "Scriptable Objects/CustomerData")]
 public class CustomerData : ScriptableObject
 {
+    public GameObject CustomerPrefab;
     public string CustomerName;
     public List<WeaponData> Weapons;
     public List<string> DialogueLines;

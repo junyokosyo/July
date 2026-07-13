@@ -1,8 +1,11 @@
 using UnityEngine;
+using System.Collections.Generic;
 
-[CreateAssetMenu(fileName = "NewScriptableObjectScript", menuName = "Scriptable Objects/NewScriptableObjectScript")]
+[CreateAssetMenu(fileName = "CustomerData", menuName = "Scriptable Objects/CustomerData")]
 public class CustomerData : ScriptableObject
 {
     public string CustomerName;
-    public WeaponData[] Weapons;
+    public List<WeaponData> Weapons;
+    public List<string> DialogueLines;
+    public bool IsSpecial;
 }

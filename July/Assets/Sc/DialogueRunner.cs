@@ -15,6 +15,7 @@ public class DialogueRunner : MonoBehaviour
 
     private void OnEnable()
     {
+        InGameEventManager.Instance.OnCustomerExit += HandleCustomerExit;
         InGameEventManager.Instance.OnCustomerReadyAtCounter += HandleCustomerAppear;
         interactAction.action.performed += OnInteract;
         interactAction.action.Enable();
@@ -83,5 +84,9 @@ public class DialogueRunner : MonoBehaviour
         InGameEventManager.Instance.EmitDialogueFinished();
         lines = null;
         Debug.Log("会話終了");
+    }
+    private void HandleCustomerExit()
+    {
+        typewriter.Clear();
     }
 }

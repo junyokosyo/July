@@ -29,6 +29,16 @@ public class TypewriterText : MonoBehaviour
         IsTyping = false;
     }
 
+
+    // TypewriterText に追加
+    /// <summary>表示中のテキストを空にする。タイプ中なら停止する。</summary>
+    public void Clear()
+    {
+        if (currentRoutine != null) StopCoroutine(currentRoutine);
+        textUI.text = "";
+        IsTyping = false;
+    }
+
     public void ShowLine(string fullText)
     {
         if (currentRoutine != null) StopCoroutine(currentRoutine);
@@ -50,4 +60,6 @@ public class TypewriterText : MonoBehaviour
 
         IsTyping = false;
     }
+
+
 }

@@ -1954,7 +1954,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fdd51c5204565141a1a6bd381aa31ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DebugTrigger
-  spawner: {fileID: 1355338387}
+  stateManager: {fileID: 1355338393}
 --- !u!1001 &374081298
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4556,8 +4556,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e8be462970911ff40bfd4c413a84f9b0, type: 2}
+  m_sharedMaterial: {fileID: -2929335668611272180, guid: e8be462970911ff40bfd4c413a84f9b0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6083,6 +6083,7 @@ GameObject:
   - component: {fileID: 1355338392}
   - component: {fileID: 1355338391}
   - component: {fileID: 1355338390}
+  - component: {fileID: 1355338393}
   m_Layer: 0
   m_Name: GameMane
   m_TagString: Untagged
@@ -6105,6 +6106,7 @@ MonoBehaviour:
   allCustomerrs:
   - {fileID: 11400000, guid: cf53be138622dd04dab5a086e2273daf, type: 2}
   - {fileID: 11400000, guid: 4e282e5ba6a2ddd4a9c41dabc39df1d1, type: 2}
+  - {fileID: 11400000, guid: 2069a68973598af4e8ead756b553e665, type: 2}
   spawnPoint: {fileID: 1464322629}
   counterPoint: {fileID: 176329261}
   exitPoint: {fileID: 70418579}
@@ -6178,6 +6180,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogueRunner
   typewriter: {fileID: 1355338390}
   interactAction: {fileID: -1816609688711058308, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+--- !u!114 &1355338393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1355338386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dfe1f6fa36191a43b2ed25450087094, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameStateManager
+  spawner: {fileID: 1355338387}
 --- !u!1001 &1364775858
 PrefabInstance:
   m_ObjectHideFlags: 0

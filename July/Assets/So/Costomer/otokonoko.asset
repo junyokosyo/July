@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c3ae3069f4ab9a947b539900574d5466, type: 3}
-  m_Name: Otoko
+  m_Name: otokonoko
   m_EditorClassIdentifier: Assembly-CSharp::CustomerData
-  CustomerPrefab: {fileID: 123466231780254893, guid: a97970729b67bad46a0e56c2a36a0da9, type: 3}
-  CustomerName: Otoko
+  CustomerPrefab: {fileID: 123466231780254893, guid: 66ac37f400110ba469d27f5741cbec74, type: 3}
+  CustomerName: daredayo
   Weapons:
   - {fileID: 11400000, guid: aa6e0893a5e798f4e8c118ebc294da3c, type: 2}
   - {fileID: 11400000, guid: b6f3122e9f99fe94a9e582133b399f76, type: 2}
   DialogueLines:
-  - "\u4F8B\u306E\u30E2\u30CE\u3092"
-  - "{weapon} \u306B\u6C7A\u307E\u3063\u3066\u3093\u3060\u308D"
-  - "\u65E9\u304F\u3057\u308D"
+  - "\u30DE\u30A4\u30B4\u3058\u3083\u306A\u3044\u3088"
+  - "{weapon} \u3082\u3089\u3044\u306B\u304D\u305F\u3093\u3060"
+  - "\u307C\u304F\u3067\u3082\u3064\u304B\u3048\u308B\u304B\u306A"
   IsSpecial: 0

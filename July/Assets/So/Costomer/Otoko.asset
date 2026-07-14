@@ -19,5 +19,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b6f3122e9f99fe94a9e582133b399f76, type: 2}
   DialogueLines:
   - aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  - '{weapon} kure'
   - ccccccccccccccccccccccccccccccccccc
   IsSpecial: 0

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 323f0ed19f2136e4586f62fc30f2d13c, type: 3}
   m_Name: TestWeapn
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
-  WeaponName: aaaa
+  WeaponName: SR
   WeaponPrefab: {fileID: 1030989959, guid: abc00000000011356177842743729169, type: 3}

@@ -1,57 +1,46 @@
 using UnityEngine;
 using System;
-using System.Collections.Generic;
 
 public class InGameEventManager : MonoBehaviour
 {
-    /// <summary>
-    /// 客が店に出現した時に発火。抽選済みの客データ(欲しい銃も確定済み)を運ぶ。
-    /// </summary>
+
+    /// <summary>客が店に出現した時に発火。抽選済みの客データ(欲しい銃も確定済み)を運ぶ。</summary>
     public event Action<CustomerRuntimeData> OnCustomerAppear;
 
-    /// <summary>
-    /// 会話の1行が表示される時に発火。タイプライター表示するテキスト本文を運ぶ。
-    /// </summary>
+    /// <summary>プレイヤーがEを押して会話を開始した時に発火。対象の客データを運ぶ。</summary>
+    public event Action<CustomerRuntimeData> OnDialogueStartRequested;
+
+    /// <summary>会話の1行が表示される時に発火。タイプライター表示するテキスト本文を運ぶ。</summary>
     public event Action<string> OnDialogueLineShown;
 
-    ///// <summary>
-    ///// プレイヤーがカウンターに銃を置いた時に発火。置かれた銃のデータを運ぶ。
-    ///// </summary>
-    //public event Action<WeaponData> OnItemPlacedOnCounter;
-
-    /// <summary>`お客さんの会話終了のイベント</summary>
+    /// <summary>客の会話が全て終了した時に発火。</summary>
     public event Action OnDialogueFinished;
 
 
-    /// <summary>
-    /// プレイヤーが判定ボタンを押した時に発火。引数なし、「押された」という事実のみ。
-    /// </summary>
+    /// <summary>プレイヤーが判定ボタンを押した時に発火。引数なし、「押された」という事実のみ。</summary>
     public event Action OnJudgePressed;
 
-    /// <summary>
-    /// 判定処理が完了した時に発火。true=正解、false=不正解。
-    /// </summary>
+    /// <summary>判定処理が完了した時に発火。true=正解、false=不正解。</summary>
     public event Action<bool> OnJudgmentResult;
 
-    /// <summary>
-    /// ジャンプスケア等の演出パターンが決まった時に発火。どの演出を再生するかのIDを運ぶ。
-    /// </summary>
+
+    /// <summary>ジャンプスケア等の演出パターンが決まった時に発火。どの演出を再生するかのIDを運ぶ。</summary>
     public event Action<string> OnJumpscareTriggered;
 
-    /// <summary>
-    /// 客が店を去る時に発火。引数なし。
-    /// </summary>
+    /// <summary>客が店を去る時に発火。引数なし。</summary>
     public event Action OnCustomerExit;
+
+
 
 
     /// <summary>客の出現イベントを発火する。</summary>
     public void EmitCustomerAppear(CustomerRuntimeData data) => OnCustomerAppear?.Invoke(data);
 
+    /// <summary>会話開始要求イベントを発火する。</summary>
+    public void EmitDialogueStartRequested(CustomerRuntimeData data) => OnDialogueStartRequested?.Invoke(data);
+
     /// <summary>会話1行分の表示イベントを発火する。</summary>
     public void EmitDialogueLineShown(string line) => OnDialogueLineShown?.Invoke(line);
-
-    ///// <summary>カウンターへの銃設置イベントを発火する。</summary>
-    //public void EmitItemPlacedOnCounter(WeaponData item) => OnItemPlacedOnCounter?.Invoke(item);
 
     /// <summary>会話終了イベントを発火する。</summary>
     public void EmitDialogueFinished() => OnDialogueFinished?.Invoke();

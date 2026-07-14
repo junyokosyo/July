@@ -6064,7 +6064,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TypeSoundPlayer
   typewriter: {fileID: 1355338390}
   audioSource: {fileID: 2101225349}
-  typeSound: {fileID: 8300000, guid: f4a0af0a6f9d0714985a2551cb84ba8f, type: 3}
+  typeSound: {fileID: 8300000, guid: a2adef9b64c37c04c990ebe942c53cfa, type: 3}
 --- !u!114 &1355338392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6078,6 +6078,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogueRunner
   typewriter: {fileID: 1355338390}
+  interactAction: {fileID: -1816609688711058308, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!1001 &1364775858
 PrefabInstance:
   m_ObjectHideFlags: 0

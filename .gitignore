@@ -5,3 +5,85 @@ July/IRasterCommandBuffer.cs
 July/IUnsafeCommandBuffer.cs
 July/RasterCommandBuffer.cs
 July/UnsafeCommandBuffer.cs
+July/Assets/TextMesh Pro.meta
+July/Assets/TextMesh Pro/Fonts.meta
+July/Assets/TextMesh Pro/Resources.meta
+July/Assets/TextMesh Pro/Shaders.meta
+July/Assets/TextMesh Pro/Sprites.meta
+July/Assets/TextMesh Pro/Fonts/LiberationSans - OFL.txt
+July/Assets/TextMesh Pro/Fonts/LiberationSans - OFL.txt.meta
+July/Assets/TextMesh Pro/Fonts/LiberationSans.ttf
+July/Assets/TextMesh Pro/Fonts/LiberationSans.ttf.meta
+July/Assets/TextMesh Pro/Resources/Fonts & Materials.meta
+July/Assets/TextMesh Pro/Resources/LineBreaking Following Characters.txt
+July/Assets/TextMesh Pro/Resources/LineBreaking Following Characters.txt.meta
+July/Assets/TextMesh Pro/Resources/LineBreaking Leading Characters.txt
+July/Assets/TextMesh Pro/Resources/LineBreaking Leading Characters.txt.meta
+July/Assets/TextMesh Pro/Resources/Sprite Assets.meta
+July/Assets/TextMesh Pro/Resources/Style Sheets.meta
+July/Assets/TextMesh Pro/Resources/TMP Settings.asset
+July/Assets/TextMesh Pro/Resources/TMP Settings.asset.meta
+July/Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Drop Shadow.mat
+July/Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Drop Shadow.mat.meta
+July/Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+July/Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset.meta
+July/Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Outline.mat
+July/Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Outline.mat.meta
+July/Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset
+July/Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset.meta
+July/Assets/TextMesh Pro/Resources/Sprite Assets/EmojiOne.asset
+July/Assets/TextMesh Pro/Resources/Sprite Assets/EmojiOne.asset.meta
+July/Assets/TextMesh Pro/Resources/Style Sheets/Default Style Sheet.asset
+July/Assets/TextMesh Pro/Resources/Style Sheets/Default Style Sheet.asset.meta
+July/Assets/TextMesh Pro/Shaders/SDFFunctions.hlsl
+July/Assets/TextMesh Pro/Shaders/SDFFunctions.hlsl.meta
+July/Assets/TextMesh Pro/Shaders/TMP_Bitmap.shader
+July/Assets/TextMesh Pro/Shaders/TMP_Bitmap.shader.meta
+July/Assets/TextMesh Pro/Shaders/TMP_Bitmap-Custom-Atlas.shader
+July/Assets/TextMesh Pro/Shaders/TMP_Bitmap-Custom-Atlas.shader.meta
+July/Assets/TextMesh Pro/Shaders/TMP_Bitmap-Mobile.shader
+July/Assets/TextMesh Pro/Shaders/TMP_Bitmap-Mobile.shader.meta
+July/Assets/TextMesh Pro/Shaders/TMP_SDF Overlay.shader
+July/Assets/TextMesh Pro/Shaders/TMP_SDF Overlay.shader.meta
+July/Assets/TextMesh Pro/Shaders/TMP_SDF SSD.shader
+July/Assets/TextMesh Pro/Shaders/TMP_SDF SSD.shader.meta
+July/Assets/TextMesh Pro/Shaders/TMP_SDF.shader
+July/Assets/TextMesh Pro/Shaders/TMP_SDF.shader.meta
+July/Assets/TextMesh Pro/Shaders/TMP_SDF-HDRP LIT.shadergraph
+July/Assets/TextMesh Pro/Shaders/TMP_SDF-HDRP LIT.shadergraph.meta
+July/Assets/TextMesh Pro/Shaders/TMP_SDF-HDRP UNLIT.shadergraph
+July/Assets/TextMesh Pro/Shaders/TMP_SDF-HDRP UNLIT.shadergraph.meta
+July/Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile Masking.shader
+July/Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile Masking.shader.meta
+July/Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile Overlay.shader
+July/Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile Overlay.shader.meta
+July/Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile SSD.shader
+July/Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile SSD.shader.meta
+July/Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile.shader
+July/Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile.shader.meta
+July/Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile-2-Pass.shader
+July/Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile-2-Pass.shader.meta
+July/Assets/TextMesh Pro/Shaders/TMP_SDF-Surface.shader
+July/Assets/TextMesh Pro/Shaders/TMP_SDF-Surface.shader.meta
+July/Assets/TextMesh Pro/Shaders/TMP_SDF-Surface-Mobile.shader
+July/Assets/TextMesh Pro/Shaders/TMP_SDF-Surface-Mobile.shader.meta
+July/Assets/TextMesh Pro/Shaders/TMP_SDF-URP Lit.shadergraph
+July/Assets/TextMesh Pro/Shaders/TMP_SDF-URP Lit.shadergraph.meta
+July/Assets/TextMesh Pro/Shaders/TMP_SDF-URP Unlit.shadergraph
+July/Assets/TextMesh Pro/Shaders/TMP_SDF-URP Unlit.shadergraph.meta
+July/Assets/TextMesh Pro/Shaders/TMP_Sprite.shader
+July/Assets/TextMesh Pro/Shaders/TMP_Sprite.shader.meta
+July/Assets/TextMesh Pro/Shaders/TMPro.cginc
+July/Assets/TextMesh Pro/Shaders/TMPro.cginc.meta
+July/Assets/TextMesh Pro/Shaders/TMPro_Mobile.cginc
+July/Assets/TextMesh Pro/Shaders/TMPro_Mobile.cginc.meta
+July/Assets/TextMesh Pro/Shaders/TMPro_Properties.cginc
+July/Assets/TextMesh Pro/Shaders/TMPro_Properties.cginc.meta
+July/Assets/TextMesh Pro/Shaders/TMPro_Surface.cginc
+July/Assets/TextMesh Pro/Shaders/TMPro_Surface.cginc.meta
+July/Assets/TextMesh Pro/Sprites/EmojiOne Attribution.txt
+July/Assets/TextMesh Pro/Sprites/EmojiOne Attribution.txt.meta
+July/Assets/TextMesh Pro/Sprites/EmojiOne.json
+July/Assets/TextMesh Pro/Sprites/EmojiOne.json.meta
+July/Assets/TextMesh Pro/Sprites/EmojiOne.png
+July/Assets/TextMesh Pro/Sprites/EmojiOne.png.meta

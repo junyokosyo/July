@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c3ae3069f4ab9a947b539900574d5466, type: 3}
-  m_Name: Otoko
+  m_Name: Otoko 1
   m_EditorClassIdentifier: Assembly-CSharp::CustomerData
   CustomerPrefab: {fileID: 123466231780254893, guid: a97970729b67bad46a0e56c2a36a0da9, type: 3}
-  CustomerName: Otoko
+  CustomerName: daredayo
   Weapons:
   - {fileID: 11400000, guid: aa6e0893a5e798f4e8c118ebc294da3c, type: 2}
   - {fileID: 11400000, guid: b6f3122e9f99fe94a9e582133b399f76, type: 2}

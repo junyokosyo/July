@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-
+using UnityEngine.InputSystem;
 
 /// <summary>
 /// 会話の進行を管理するクラス。カスタマーが出現した際に、DialogueLinesを順番に表示する。
@@ -7,17 +7,30 @@
 public class DialogueRunner : MonoBehaviour
 {
     [SerializeField] private TypewriterText typewriter;
+    [SerializeField] private InputActionReference interactAction;
 
     private string[] lines;
     private int currentIndex;
     private void OnEnable()
     {
         InGameEventManager.Instance.OnCustomerAppear += HandleCustomerAppear;
+        interactAction.action.performed += OnInteract;
+        interactAction.action.Enable();
     }
 
     private void OnDisable()
     {
         InGameEventManager.Instance.OnCustomerAppear -= HandleCustomerAppear;
+        interactAction.action.performed -= OnInteract;
+        interactAction.action.Disable();
+    }
+
+    private void OnInteract(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            Advance();
+        }
     }
 
     private void HandleCustomerAppear(CustomerRuntimeData data)
@@ -30,13 +43,13 @@ public class DialogueRunner : MonoBehaviour
     /// <summary>クリックやキー入力で次の行へ進める想定。</summary>
     public void Advance()
     {
+        if (lines == null) return;
+
         if (typewriter.IsTyping)
         {
             typewriter.Skip();
             return;
         }
-
-        // 次の行へ進む
         currentIndex++;
         if (currentIndex >= lines.Length)
         {
@@ -56,6 +69,7 @@ public class DialogueRunner : MonoBehaviour
     private void EndDialogue()
     {
         InGameEventManager.Instance.EmitDialogueFinished();
+        lines = null;
         Debug.Log("会話終了");
     }
 }

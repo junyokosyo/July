@@ -32,10 +32,11 @@ public class DialogueRunner : MonoBehaviour
     {
         if (typewriter.IsTyping)
         {
-            // タイプ中にクリックされた場合は、タイプを即座に完了させる物を呼び出したい
+            typewriter.Skip();
             return;
         }
 
+        // 次の行へ進む
         currentIndex++;
         if (currentIndex >= lines.Length)
         {

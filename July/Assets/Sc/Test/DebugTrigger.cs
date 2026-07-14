@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class DebugTrigger : MonoBehaviour
 {
-    [SerializeField] private CustomerSpawner spawner;
+    [SerializeField] private GameStateManager stateManager; // spawnerから変更
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            spawner.SpawnRandomCustomer();
+            stateManager.RequestNextCustomer(); // 状態管理経由で呼ぶ
         }
     }
 }

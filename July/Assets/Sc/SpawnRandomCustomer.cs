@@ -12,6 +12,16 @@ public class CustomerSpawner : MonoBehaviour
     private Transform spawnPoint;
     [SerializeField]
     private Transform counterPoint;
+    [SerializeField] 
+    private Transform exitPoint;
+
+    private CustomerController currentController;
+
+
+    private void Start()
+    {
+        InGameEventManager.Instance.OnJudgmentResult += HandleJudgmentResult;
+    }
 
     public void SpawnRandomCustomer()
     {
@@ -40,7 +50,22 @@ public class CustomerSpawner : MonoBehaviour
         }
         controller.Initialize(runtimeData, counterPoint.position);
 
+        currentController = controller;
+
         InGameEventManager.Instance.EmitCustomerAppear(runtimeData);
+    }
+
+    /// <summary>
+    /// 判定結果を受け取ったら、客を退場させる
+    /// </summary>
+    /// <param name="isCorrect"></param>
+    private void HandleJudgmentResult(bool isCorrect)
+    {
+        if (currentController != null)
+        {
+            currentController.Leave(exitPoint.position);
+            currentController = null;
+        }
     }
 }
 

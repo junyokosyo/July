@@ -5765,7 +5765,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomerSpawner
   allCustomerrs:
-  - {fileID: 0}
+  - {fileID: 11400000, guid: cf53be138622dd04dab5a086e2273daf, type: 2}
+  - {fileID: 11400000, guid: 4e282e5ba6a2ddd4a9c41dabc39df1d1, type: 2}
 --- !u!114 &1355338388
 MonoBehaviour:
   m_ObjectHideFlags: 0

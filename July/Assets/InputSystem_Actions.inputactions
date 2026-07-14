@@ -342,11 +342,11 @@
             ]
         },
         {
-            "name": "CustomerInteraction",
+            "name": "Dialogue",
             "id": "321dc6f6-0756-4846-bc54-e4352848a50f",
             "actions": [
                 {
-                    "name": "Dialogue",
+                    "name": "Advance",
                     "type": "Button",
                     "id": "fa207001-c4fb-4d61-b937-9b1a4a6d15d0",
                     "expectedControlType": "",
@@ -363,7 +363,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Dialogue",
+                    "action": "Advance",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -428,11 +428,11 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             ]
         },
         {
-            ""name"": ""CustomerInteraction"",
+            ""name"": ""Dialogue"",
             ""id"": ""321dc6f6-0756-4846-bc54-e4352848a50f"",
             ""actions"": [
                 {
-                    ""name"": ""Dialogue"",
+                    ""name"": ""Advance"",
                     ""type"": ""Button"",
                     ""id"": ""fa207001-c4fb-4d61-b937-9b1a4a6d15d0"",
                     ""expectedControlType"": """",
@@ -449,7 +449,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Dialogue"",
+                    ""action"": ""Advance"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -526,15 +526,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
-        // CustomerInteraction
-        m_CustomerInteraction = asset.FindActionMap("CustomerInteraction", throwIfNotFound: true);
-        m_CustomerInteraction_Dialogue = m_CustomerInteraction.FindAction("Dialogue", throwIfNotFound: true);
+        // Dialogue
+        m_Dialogue = asset.FindActionMap("Dialogue", throwIfNotFound: true);
+        m_Dialogue_Advance = m_Dialogue.FindAction("Advance", throwIfNotFound: true);
     }
 
     ~@PlayerInputActions()
     {
         UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, PlayerInputActions.Player.Disable() has not been called.");
-        UnityEngine.Debug.Assert(!m_CustomerInteraction.enabled, "This will cause a leak and performance issues, PlayerInputActions.CustomerInteraction.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_Dialogue.enabled, "This will cause a leak and performance issues, PlayerInputActions.Dialogue.Disable() has not been called.");
     }
 
     /// <summary>
@@ -747,29 +747,29 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     /// </summary>
     public PlayerActions @Player => new PlayerActions(this);
 
-    // CustomerInteraction
-    private readonly InputActionMap m_CustomerInteraction;
-    private List<ICustomerInteractionActions> m_CustomerInteractionActionsCallbackInterfaces = new List<ICustomerInteractionActions>();
-    private readonly InputAction m_CustomerInteraction_Dialogue;
+    // Dialogue
+    private readonly InputActionMap m_Dialogue;
+    private List<IDialogueActions> m_DialogueActionsCallbackInterfaces = new List<IDialogueActions>();
+    private readonly InputAction m_Dialogue_Advance;
     /// <summary>
-    /// Provides access to input actions defined in input action map "CustomerInteraction".
+    /// Provides access to input actions defined in input action map "Dialogue".
     /// </summary>
-    public struct CustomerInteractionActions
+    public struct DialogueActions
     {
         private @PlayerInputActions m_Wrapper;
 
         /// <summary>
         /// Construct a new instance of the input action map wrapper class.
         /// </summary>
-        public CustomerInteractionActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
+        public DialogueActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
         /// <summary>
-        /// Provides access to the underlying input action "CustomerInteraction/Dialogue".
+        /// Provides access to the underlying input action "Dialogue/Advance".
         /// </summary>
-        public InputAction @Dialogue => m_Wrapper.m_CustomerInteraction_Dialogue;
+        public InputAction @Advance => m_Wrapper.m_Dialogue_Advance;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
-        public InputActionMap Get() { return m_Wrapper.m_CustomerInteraction; }
+        public InputActionMap Get() { return m_Wrapper.m_Dialogue; }
         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
         public void Enable() { Get().Enable(); }
         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
@@ -777,9 +777,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
         public bool enabled => Get().enabled;
         /// <summary>
-        /// Implicitly converts an <see ref="CustomerInteractionActions" /> to an <see ref="InputActionMap" /> instance.
+        /// Implicitly converts an <see ref="DialogueActions" /> to an <see ref="InputActionMap" /> instance.
         /// </summary>
-        public static implicit operator InputActionMap(CustomerInteractionActions set) { return set.Get(); }
+        public static implicit operator InputActionMap(DialogueActions set) { return set.Get(); }
         /// <summary>
         /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
         /// </summary>
@@ -787,14 +787,14 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// <remarks>
         /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
         /// </remarks>
-        /// <seealso cref="CustomerInteractionActions" />
-        public void AddCallbacks(ICustomerInteractionActions instance)
+        /// <seealso cref="DialogueActions" />
+        public void AddCallbacks(IDialogueActions instance)
         {
-            if (instance == null || m_Wrapper.m_CustomerInteractionActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_CustomerInteractionActionsCallbackInterfaces.Add(instance);
-            @Dialogue.started += instance.OnDialogue;
-            @Dialogue.performed += instance.OnDialogue;
-            @Dialogue.canceled += instance.OnDialogue;
+            if (instance == null || m_Wrapper.m_DialogueActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_DialogueActionsCallbackInterfaces.Add(instance);
+            @Advance.started += instance.OnAdvance;
+            @Advance.performed += instance.OnAdvance;
+            @Advance.canceled += instance.OnAdvance;
         }
 
         /// <summary>
@@ -803,21 +803,21 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// <remarks>
         /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
         /// </remarks>
-        /// <seealso cref="CustomerInteractionActions" />
-        private void UnregisterCallbacks(ICustomerInteractionActions instance)
+        /// <seealso cref="DialogueActions" />
+        private void UnregisterCallbacks(IDialogueActions instance)
         {
-            @Dialogue.started -= instance.OnDialogue;
-            @Dialogue.performed -= instance.OnDialogue;
-            @Dialogue.canceled -= instance.OnDialogue;
+            @Advance.started -= instance.OnAdvance;
+            @Advance.performed -= instance.OnAdvance;
+            @Advance.canceled -= instance.OnAdvance;
         }
 
         /// <summary>
-        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="CustomerInteractionActions.UnregisterCallbacks(ICustomerInteractionActions)" />.
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="DialogueActions.UnregisterCallbacks(IDialogueActions)" />.
         /// </summary>
-        /// <seealso cref="CustomerInteractionActions.UnregisterCallbacks(ICustomerInteractionActions)" />
-        public void RemoveCallbacks(ICustomerInteractionActions instance)
+        /// <seealso cref="DialogueActions.UnregisterCallbacks(IDialogueActions)" />
+        public void RemoveCallbacks(IDialogueActions instance)
         {
-            if (m_Wrapper.m_CustomerInteractionActionsCallbackInterfaces.Remove(instance))
+            if (m_Wrapper.m_DialogueActionsCallbackInterfaces.Remove(instance))
                 UnregisterCallbacks(instance);
         }
 
@@ -827,21 +827,21 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// <remarks>
         /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
         /// </remarks>
-        /// <seealso cref="CustomerInteractionActions.AddCallbacks(ICustomerInteractionActions)" />
-        /// <seealso cref="CustomerInteractionActions.RemoveCallbacks(ICustomerInteractionActions)" />
-        /// <seealso cref="CustomerInteractionActions.UnregisterCallbacks(ICustomerInteractionActions)" />
-        public void SetCallbacks(ICustomerInteractionActions instance)
+        /// <seealso cref="DialogueActions.AddCallbacks(IDialogueActions)" />
+        /// <seealso cref="DialogueActions.RemoveCallbacks(IDialogueActions)" />
+        /// <seealso cref="DialogueActions.UnregisterCallbacks(IDialogueActions)" />
+        public void SetCallbacks(IDialogueActions instance)
         {
-            foreach (var item in m_Wrapper.m_CustomerInteractionActionsCallbackInterfaces)
+            foreach (var item in m_Wrapper.m_DialogueActionsCallbackInterfaces)
                 UnregisterCallbacks(item);
-            m_Wrapper.m_CustomerInteractionActionsCallbackInterfaces.Clear();
+            m_Wrapper.m_DialogueActionsCallbackInterfaces.Clear();
             AddCallbacks(instance);
         }
     }
     /// <summary>
-    /// Provides a new <see cref="CustomerInteractionActions" /> instance referencing this action map.
+    /// Provides a new <see cref="DialogueActions" /> instance referencing this action map.
     /// </summary>
-    public CustomerInteractionActions @CustomerInteraction => new CustomerInteractionActions(this);
+    public DialogueActions @Dialogue => new DialogueActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     /// <summary>
     /// Provides access to the input control scheme.
@@ -951,18 +951,18 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnSprint(InputAction.CallbackContext context);
     }
     /// <summary>
-    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "CustomerInteraction" which allows adding and removing callbacks.
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Dialogue" which allows adding and removing callbacks.
     /// </summary>
-    /// <seealso cref="CustomerInteractionActions.AddCallbacks(ICustomerInteractionActions)" />
-    /// <seealso cref="CustomerInteractionActions.RemoveCallbacks(ICustomerInteractionActions)" />
-    public interface ICustomerInteractionActions
+    /// <seealso cref="DialogueActions.AddCallbacks(IDialogueActions)" />
+    /// <seealso cref="DialogueActions.RemoveCallbacks(IDialogueActions)" />
+    public interface IDialogueActions
     {
         /// <summary>
-        /// Method invoked when associated input action "Dialogue" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "Advance" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnDialogue(InputAction.CallbackContext context);
+        void OnAdvance(InputAction.CallbackContext context);
     }
 }

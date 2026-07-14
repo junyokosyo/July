@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2934564499677799341}
   - component: {fileID: 8744143590678761998}
+  - component: {fileID: 5528769471604044376}
   m_Layer: 0
   m_Name: otkoEnemy
   m_TagString: Untagged
@@ -91,3 +92,17 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &5528769471604044376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 123466231780254893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae461c2a612d0ac4691025d04c4bace2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomerController
+  moveSpeed: 2
+  arriveThreshold: 0.05

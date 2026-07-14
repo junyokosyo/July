@@ -14,10 +14,14 @@ public class InGameEventManager : MonoBehaviour
     /// </summary>
     public event Action<string> OnDialogueLineShown;
 
-    /// <summary>
-    /// プレイヤーがカウンターに銃を置いた時に発火。置かれた銃のデータを運ぶ。
-    /// </summary>
-    public event Action<WeaponData> OnItemPlacedOnCounter;
+    ///// <summary>
+    ///// プレイヤーがカウンターに銃を置いた時に発火。置かれた銃のデータを運ぶ。
+    ///// </summary>
+    //public event Action<WeaponData> OnItemPlacedOnCounter;
+
+    /// <summary>`お客さんの会話終了のイベント</summary>
+    public event Action OnDialogueFinished;
+
 
     /// <summary>
     /// プレイヤーが判定ボタンを押した時に発火。引数なし、「押された」という事実のみ。
@@ -39,14 +43,18 @@ public class InGameEventManager : MonoBehaviour
     /// </summary>
     public event Action OnCustomerExit;
 
+
     /// <summary>客の出現イベントを発火する。</summary>
     public void EmitCustomerAppear(CustomerRuntimeData data) => OnCustomerAppear?.Invoke(data);
 
     /// <summary>会話1行分の表示イベントを発火する。</summary>
     public void EmitDialogueLineShown(string line) => OnDialogueLineShown?.Invoke(line);
 
-    /// <summary>カウンターへの銃設置イベントを発火する。</summary>
-    public void EmitItemPlacedOnCounter(WeaponData item) => OnItemPlacedOnCounter?.Invoke(item);
+    ///// <summary>カウンターへの銃設置イベントを発火する。</summary>
+    //public void EmitItemPlacedOnCounter(WeaponData item) => OnItemPlacedOnCounter?.Invoke(item);
+
+    /// <summary>会話終了イベントを発火する。</summary>
+    public void EmitDialogueFinished() => OnDialogueFinished?.Invoke();
 
     /// <summary>判定ボタン押下イベントを発火する。</summary>
     public void EmitJudgePressed() => OnJudgePressed?.Invoke();
@@ -74,7 +82,4 @@ public class InGameEventManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
-
-
-   
 }

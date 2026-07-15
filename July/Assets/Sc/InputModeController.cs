@@ -1,48 +1,73 @@
 using UnityEngine;
 
-/// <summary>
-/// このクラスは、ゲーム内の入力モードを管理します。プレイヤーが会話中かどうかに応じて、適切な入力アクションマップを有効化または無効化します。
-/// </summary>
+
+
+public enum InputMode
+{
+    Gameplay,
+    Dialogue,
+    PC,
+}
+
 public class InputModeController : MonoBehaviour
 {
-    private PlayerInputActions _inputActions;
+    public static InputModeController Instance { get; private set; }
+
+    private PlayerInputActions _actions;
+
+    public InputMode CurrentMode { get; private set; }
 
     private void Awake()
     {
-        _inputActions = new PlayerInputActions();
-    }
-
-    private void OnEnable()
-    {
-        InGameEventManager.Instance.OnDialogueStartRequested += EnterDialogueMode;
-        InGameEventManager.Instance.OnDialogueFinished += ExitDialogueMode;
-    }
-
-    private void OnDisable()
-    {
-        if (InGameEventManager.Instance != null)
+        if (Instance != null && Instance != this)
         {
-            InGameEventManager.Instance.OnDialogueStartRequested -= EnterDialogueMode;
-            InGameEventManager.Instance.OnDialogueFinished -= ExitDialogueMode;
+            Destroy(gameObject);
+            return;
         }
+        Instance = this;
+        _actions = PlayerInputProvider.Instance.Actions;
     }
 
     private void Start()
     {
-        _inputActions.Player.Enable();
-        _inputActions.Dialogue.Disable();
+        SetMode(InputMode.Gameplay);
     }
 
-    private void EnterDialogueMode(CustomerRuntimeData data)
+    public void SetMode(InputMode mode)
     {
-        _inputActions.Player.Disable();
-        _inputActions.Dialogue.Enable();
+        CurrentMode = mode;
+
+        switch (mode)
+        {
+            case InputMode.Gameplay:
+                _actions.Player.Enable();
+                _actions.Dialogue.Disable();
+                _actions.PC.Enable();
+                SetCursor(locked: true);
+                break;
+
+            case InputMode.Dialogue:
+                _actions.Player.Disable();
+                _actions.Dialogue.Enable();
+                _actions.PC.Disable();
+                SetCursor(locked: true);
+                break;
+
+            case InputMode.PC:
+                _actions.Player.Disable();
+                _actions.Dialogue.Disable();
+                _actions.PC.Disable();
+                SetCursor(locked: false);
+                break;
+        }
+
+        Debug.Log($"入力モード変更: {mode}");
     }
 
-    private void ExitDialogueMode()
+    private void SetCursor(bool locked)
     {
-        _inputActions.Dialogue.Disable();
-        _inputActions.Player.Enable();
+        Cursor.lockState = locked ? CursorLockMode.Locked : CursorLockMode.None;
+        Cursor.visible = !locked;
     }
 
 }

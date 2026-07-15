@@ -7,33 +7,43 @@ using UnityEngine.InputSystem;
 public class DialogueRunner : MonoBehaviour
 {
     [SerializeField] private TypewriterText typewriter;
-    [SerializeField] private InputActionReference interactAction;
 
+    private PlayerInputActions _inputActions;
     private string[] lines;
     private int currentIndex;
     private CustomerRuntimeData currentCustomer;
 
+    private void Awake()
+    {
+        _inputActions = PlayerInputProvider.Instance.Actions;
+    }
+
     private void OnEnable()
     {
-        InGameEventManager.Instance.OnCustomerExit += HandleCustomerExit;
-        InGameEventManager.Instance.OnCustomerReadyAtCounter += HandleCustomerAppear;
-        interactAction.action.performed += OnInteract;
-        interactAction.action.Enable();
+        _inputActions.Dialogue.Advance.performed += OnAdvance;
     }
 
     private void OnDisable()
     {
-        InGameEventManager.Instance.OnCustomerReadyAtCounter -= HandleCustomerAppear;
-        interactAction.action.performed -= OnInteract;
-        interactAction.action.Disable();
+        _inputActions.Dialogue.Advance.performed -= OnAdvance;
     }
 
-    private void OnInteract(InputAction.CallbackContext context)
+    private void Start()
     {
-        if (context.performed)
-        {
-            Advance();
-        }
+        InGameEventManager.Instance.OnCustomerReadyAtCounter += HandleCustomerAppear;
+        InGameEventManager.Instance.OnCustomerExit += HandleCustomerExit;
+    }
+
+    private void OnDestroy()
+    {
+        if (InGameEventManager.Instance != null)
+            InGameEventManager.Instance.OnCustomerReadyAtCounter -= HandleCustomerAppear;
+        InGameEventManager.Instance.OnCustomerExit -= HandleCustomerExit;
+    }
+
+    private void OnAdvance(InputAction.CallbackContext context)
+    {
+        Advance();
     }
 
     private void HandleCustomerAppear(CustomerRuntimeData data)
@@ -44,7 +54,6 @@ public class DialogueRunner : MonoBehaviour
         ShowCurrentLine();
     }
 
-    /// <summary>クリックやキー入力で次の行へ進める想定。</summary>
     public void Advance()
     {
         if (lines == null) return;
@@ -70,6 +79,7 @@ public class DialogueRunner : MonoBehaviour
         typewriter.ShowLine(line);
         InGameEventManager.Instance.EmitDialogueLineShown(line);
     }
+
     private string ReplacePlaceholders(string line)
     {
         if (currentCustomer != null && currentCustomer.ResolvedItem != null)
@@ -88,5 +98,6 @@ public class DialogueRunner : MonoBehaviour
     private void HandleCustomerExit()
     {
         typewriter.Clear();
+        currentCustomer = null;
     }
 }

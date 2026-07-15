@@ -24,42 +24,14 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         _characterController = GetComponent<CharacterController>();
+        _inputActions = PlayerInputProvider.Instance.Actions;
 
-        _inputActions = new PlayerInputActions();
-
-        _inputActions.Player.Move.performed +=
-            context => _moveInput = context.ReadValue<Vector2>();
-
-        _inputActions.Player.Move.canceled +=
-            _ => _moveInput = Vector2.zero;
-
-        _inputActions.Player.Look.performed +=
-            context => _lookInput = context.ReadValue<Vector2>();
-
-        _inputActions.Player.Look.canceled +=
-            _ => _lookInput = Vector2.zero;
-
-        _inputActions.Player.Sprint.performed +=
-            _ => _isSprinting = true;
-
-        _inputActions.Player.Sprint.canceled +=
-            _ => _isSprinting = false;
-    }
-
-    private void OnEnable()
-    {
-        _inputActions.Enable();
-    }
-
-    private void OnDisable()
-    {
-        _inputActions.Disable();
-    }
-
-    private void Start()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        _inputActions.Player.Move.performed += context => _moveInput = context.ReadValue<Vector2>();
+        _inputActions.Player.Move.canceled += _ => _moveInput = Vector2.zero;
+        _inputActions.Player.Look.performed += context => _lookInput = context.ReadValue<Vector2>();
+        _inputActions.Player.Look.canceled += _ => _lookInput = Vector2.zero;
+        _inputActions.Player.Sprint.performed += _ => _isSprinting = true;
+        _inputActions.Player.Sprint.canceled += _ => _isSprinting = false;
     }
 
     private void Update()

@@ -3,15 +3,30 @@ using UnityEngine;
 public class GameStateManager : MonoBehaviour
 {
     [SerializeField] private CustomerSpawner spawner;
+    [SerializeField] private DialogueCameraFocus cameraFocus;
 
     public GameState CurrentState { get; private set; } = GameState.Idle;
 
     private void Start()
     {
-        InGameEventManager.Instance.OnCustomerReadyAtCounter += _ => ChangeState(GameState.Dialogue);
-        InGameEventManager.Instance.OnDialogueFinished += () => ChangeState(GameState.Serving);
+        InGameEventManager.Instance.OnCustomerReadyAtCounter += OnReadyAtCounter;
+        InGameEventManager.Instance.OnDialogueFinished += OnDialogueFinished;
         InGameEventManager.Instance.OnJudgmentResult += _ => ChangeState(GameState.Result);
         InGameEventManager.Instance.OnCustomerExit += () => ChangeState(GameState.Idle);
+    }
+
+    private void OnReadyAtCounter(CustomerRuntimeData data)
+    {
+        ChangeState(GameState.Dialogue);
+        InputModeController.Instance.SetMode(InputMode.Dialogue);
+        cameraFocus.StartFocus();
+    }
+
+    private void OnDialogueFinished()
+    {
+        ChangeState(GameState.Serving);
+        InputModeController.Instance.SetMode(InputMode.Gameplay);
+        cameraFocus.StopFocus();
     }
 
     private void ChangeState(GameState newState)
@@ -26,7 +41,6 @@ public class GameStateManager : MonoBehaviour
         }
     }
 
-    /// <summary>次の客を呼ぶ。Idle状態の時だけ有効。</summary>
     public void RequestNextCustomer()
     {
         if (CurrentState != GameState.Idle)

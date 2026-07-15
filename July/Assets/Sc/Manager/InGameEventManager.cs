@@ -7,6 +7,9 @@ public class InGameEventManager : MonoBehaviour
     /// <summary>客が店に出現した時に発火。抽選済みの客データ(欲しい銃も確定済み)を運ぶ。</summary>
     public event Action<CustomerRuntimeData> OnCustomerAppear;
 
+    /// <summary>客がカウンターに到着し、会話可能になった時に発火。</summary>
+    public event Action<CustomerRuntimeData> OnCustomerReadyAtCounter;
+
     /// <summary>プレイヤーがEを押して会話を開始した時に発火。対象の客データを運ぶ。</summary>
     public event Action<CustomerRuntimeData> OnDialogueStartRequested;
 
@@ -35,6 +38,10 @@ public class InGameEventManager : MonoBehaviour
 
     /// <summary>客の出現イベントを発火する。</summary>
     public void EmitCustomerAppear(CustomerRuntimeData data) => OnCustomerAppear?.Invoke(data);
+
+
+    /// <summary>客がカウンターに到着し、会話可能になった時のイベントを発火する。/// </summary>
+    public void EmitCustomerReadyAtCounter(CustomerRuntimeData data) => OnCustomerReadyAtCounter?.Invoke(data);
 
     /// <summary>会話開始要求イベントを発火する。</summary>
     public void EmitDialogueStartRequested(CustomerRuntimeData data) => OnDialogueStartRequested?.Invoke(data);

@@ -3,6 +3,7 @@
 /// </summary>
 public class CustomerRuntimeData
 {
+    private CustomerRuntimeData currentCustomer;
     public CustomerData Template;
     public WeaponData ResolvedItem;
 
@@ -11,4 +12,6 @@ public class CustomerRuntimeData
         Template = data;
         ResolvedItem = RandomPicker.PickRandom(data.Weapons);
     }
+
+
 }

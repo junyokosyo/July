@@ -7,40 +7,53 @@ using UnityEngine.InputSystem;
 public class DialogueRunner : MonoBehaviour
 {
     [SerializeField] private TypewriterText typewriter;
-    [SerializeField] private InputActionReference interactAction;
 
+    private PlayerInputActions _inputActions;
     private string[] lines;
     private int currentIndex;
+    private CustomerRuntimeData currentCustomer;
+
+    private void Awake()
+    {
+        _inputActions = PlayerInputProvider.Instance.Actions;
+    }
+
     private void OnEnable()
     {
-        InGameEventManager.Instance.OnCustomerAppear += HandleCustomerAppear;
-        interactAction.action.performed += OnInteract;
-        interactAction.action.Enable();
+        _inputActions.Dialogue.Advance.performed += OnAdvance;
     }
 
     private void OnDisable()
     {
-        InGameEventManager.Instance.OnCustomerAppear -= HandleCustomerAppear;
-        interactAction.action.performed -= OnInteract;
-        interactAction.action.Disable();
+        _inputActions.Dialogue.Advance.performed -= OnAdvance;
     }
 
-    private void OnInteract(InputAction.CallbackContext context)
+    private void Start()
     {
-        if (context.performed)
-        {
-            Advance();
-        }
+        InGameEventManager.Instance.OnCustomerReadyAtCounter += HandleCustomerAppear;
+        InGameEventManager.Instance.OnCustomerExit += HandleCustomerExit;
+    }
+
+    private void OnDestroy()
+    {
+        if (InGameEventManager.Instance != null)
+            InGameEventManager.Instance.OnCustomerReadyAtCounter -= HandleCustomerAppear;
+        InGameEventManager.Instance.OnCustomerExit -= HandleCustomerExit;
+    }
+
+    private void OnAdvance(InputAction.CallbackContext context)
+    {
+        Advance();
     }
 
     private void HandleCustomerAppear(CustomerRuntimeData data)
     {
+        currentCustomer = data;
         lines = data.Template.DialogueLines.ToArray();
         currentIndex = 0;
         ShowCurrentLine();
     }
 
-    /// <summary>クリックやキー入力で次の行へ進める想定。</summary>
     public void Advance()
     {
         if (lines == null) return;
@@ -62,8 +75,18 @@ public class DialogueRunner : MonoBehaviour
     private void ShowCurrentLine()
     {
         string line = lines[currentIndex];
+        line = ReplacePlaceholders(line);
         typewriter.ShowLine(line);
         InGameEventManager.Instance.EmitDialogueLineShown(line);
+    }
+
+    private string ReplacePlaceholders(string line)
+    {
+        if (currentCustomer != null && currentCustomer.ResolvedItem != null)
+        {
+            line = line.Replace("{weapon}", currentCustomer.ResolvedItem.WeaponName);
+        }
+        return line;
     }
 
     private void EndDialogue()
@@ -71,5 +94,10 @@ public class DialogueRunner : MonoBehaviour
         InGameEventManager.Instance.EmitDialogueFinished();
         lines = null;
         Debug.Log("会話終了");
+    }
+    private void HandleCustomerExit()
+    {
+        typewriter.Clear();
+        currentCustomer = null;
     }
 }
